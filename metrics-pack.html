@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Metrics Pack — Phan Duy Thành</title>
+<style>
+  :root { --bg:#fbfaf7; --fg:#1d1d1b; --muted:#6b6a65; --line:#e3e0d8; --head:#f1eee6; --accent:#8a5a2b; --todo:#b4441f; }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) { --bg:#191816; --fg:#ecebe6; --muted:#a09e96; --line:#34322d; --head:#24221f; --accent:#d9a36b; --todo:#f08a63; }
+  }
+  * { box-sizing:border-box; }
+  body { margin:0; background:var(--bg); color:var(--fg); font:15px/1.6 system-ui, "Segoe UI", sans-serif; }
+  main { max-width:960px; margin:0 auto; padding:32px 16px 80px; }
+  h1 { margin:0 0 4px; font-size:28px; }
+  .meta { color:var(--muted); margin-bottom:32px; }
+  h2 { margin:48px 0 12px; padding-bottom:6px; border-bottom:2px solid var(--accent); font-size:20px; }
+  h3 { margin:24px 0 8px; font-size:16px; }
+  table { width:100%; border-collapse:collapse; margin:8px 0 16px; }
+  th, td { border:1px solid var(--line); padding:8px 10px; text-align:left; vertical-align:top; }
+  th { background:var(--head); font-weight:600; }
+  td:first-child { width:28%; font-weight:500; }
+  .wrap { overflow-x:auto; }
+  .todo { color:var(--todo); font-style:italic; }
+  .sentence { border-left:4px solid var(--accent); background:var(--head); padding:12px 16px; margin:8px 0 16px; }
+  pre { background:var(--head); padding:12px 16px; overflow-x:auto; white-space:pre-wrap; }
+  code { font-family:ui-monospace, Consolas, monospace; font-size:0.92em; }
+</style>
+</head>
+<body>
+<main>
+<h1>Metrics Pack</h1>
+<div class="meta">Phan Duy Thành · MHV 2A202602930 · Dự án: AI tự động thiết kế nội thất</div>
+
+<h2>00 — Phạm vi</h2>
+<div class="wrap"><table>
+<tr><td>Dự án</td><td>AI tự động thiết kế nội thất: từ ảnh hiện trạng / mặt bằng, AI dựng concept phối cảnh 3D sát thực tế kèm moodboard vật liệu.</td></tr>
+<tr><td>Persona (một persona)</td><td>Hoàng Nam, 28 tuổi — Freelance Interior Designer kiêm tư vấn thiết kế thi công nội thất, tự nhận khách, làm việc theo từng căn hộ / từng phòng.</td></tr>
+<tr><td>Core job (lời của user, không phải tính năng)</td><td>"Tôi muốn nhanh chóng biến ảnh hiện trạng mặt bằng thành các concept 3D sát thực tế kèm bảng bóc tách vật liệu sơ bộ, để chốt ý tưởng với khách ngay trong buổi tư vấn đầu tiên mà không mất 3 ngày dựng 3ds Max."</td></tr>
+</table></div>
+
+<h2>01 — Core Action</h2>
+<h3>Phân biệt bốn khái niệm</h3>
+<div class="wrap"><table>
+<tr><th>Khái niệm</th><th>Dự án của tôi</th></tr>
+<tr><td>Core job</td><td>Chốt ý tưởng thiết kế với khách ngay buổi tư vấn đầu, không mất 3 ngày dựng 3ds Max.</td></tr>
+<tr><td>Core action</td><td>Tinh chỉnh concept do AI dựng rồi xuất Design Pack hoàn chỉnh (ảnh phối cảnh + moodboard vật liệu).</td></tr>
+<tr><td>Core value</td><td>Có bộ concept đủ sát thực tế để trình khách và chốt hướng thiết kế trong một buổi.</td></tr>
+<tr><td>Core value event</td><td><code>design_concept_exported</code></td></tr>
+</table></div>
+<h3>Core Action Card</h3>
+<div class="wrap"><table>
+<tr><td>Target user</td><td>Freelance interior designer (persona Hoàng Nam).</td></tr>
+<tr><td>Core job</td><td>Chốt ý tưởng với khách ngay buổi tư vấn đầu tiên thay vì mất 3 ngày dựng 3ds Max.</td></tr>
+<tr><td>Core action</td><td>Hoàn tất tinh chỉnh và xuất Design Pack cho một phòng.</td></tr>
+<tr><td>Object</td><td>Một concept phòng (<code>design_id</code>) thuộc một dự án khách hàng (<code>project_id</code>).</td></tr>
+<tr><td>Preconditions</td><td>Đã có tài khoản; đã tải ảnh hiện trạng / mặt bằng của phòng; AI đã render ít nhất một phương án.</td></tr>
+<tr><td>Completion rule</td><td>File Design Pack (ảnh phối cảnh + moodboard vật liệu) được tạo thành công và sẵn sàng tải / chia sẻ. Bấm "Xuất" nhưng job lỗi thì không tính.</td></tr>
+<tr><td>Core value</td><td>Rút thời gian từ mặt bằng tới concept trình khách từ ~3 ngày xuống trong buổi tư vấn; chốt ý tưởng sớm hơn.</td></tr>
+<tr><td>Evidence of value</td><td>Design Pack được xuất cho một phòng thuộc dự án khách thật; designer tiếp tục xuất cho phòng / dự án kế tiếp.</td></tr>
+<tr><td>Candidate event</td><td><code>design_concept_exported</code></td></tr>
+</table></div>
+<h3>Tự kiểm 5 tiêu chí</h3>
+<div class="wrap"><table>
+<tr><th>Tiêu chí</th><th>Đạt?</th><th>Lý do</th></tr>
+<tr><td>1. Gần core value</td><td>Đạt</td><td>Xuất pack nghĩa là designer đã có sản phẩm đủ tốt để trình khách — khác với render chỉ là output của máy.</td></tr>
+<tr><td>2. Có thể lặp lại</td><td>Đạt</td><td>Mỗi phòng / khách mới lại cần một Design Pack mới.</td></tr>
+<tr><td>3. Có thể quan sát</td><td>Đạt</td><td>Thời điểm file xuất thành công xác định rõ, gắn với <code>design_id</code>.</td></tr>
+<tr><td>4. Có ý nghĩa</td><td>Đạt</td><td>Nhiều pack được xuất nghĩa là nhiều concept đủ chuẩn để trình khách; counter-metric regeneration chặn trường hợp xuất ồ ạt chất lượng kém.</td></tr>
+<tr><td>5. Có thể tác động</td><td>Đạt</td><td>Team cải thiện được chất lượng render, công cụ chỉnh đồ đạc / vật liệu và template pack.</td></tr>
+</table></div>
+<p><b>Vì sao không phải "mở app" / "bấm tạo thiết kế":</b> "Generate" hay "xem ảnh render" là System Output — AI ra ảnh chưa nghĩa là designer dùng được (có thể render nhiều lần rồi bỏ). Export là lúc designer tự xác nhận concept đủ tốt để trình khách dưới tên mình.</p>
+
+<h2>02 — Nature &amp; cadence</h2>
+<h3>Action Nature Card</h3>
+<div class="wrap"><table>
+<tr><td>Actor</td><td>Designer (tài khoản cá nhân), làm cho từng khách / căn hộ.</td></tr>
+<tr><td>Intent</td><td>Có concept trình khách nhanh để chốt ý tưởng và chốt hợp đồng.</td></tr>
+<tr><td>Trigger</td><td>Sự kiện bên ngoài: có khách mới, hoặc khách giao thêm phòng khác trong căn hộ.</td></tr>
+<tr><td>Effort</td><td>Cần ảnh hiện trạng + yêu cầu của khách; vài lượt chỉnh đồ đạc / vật liệu — ngắn hơn nhiều so với dựng 3ds Max.</td></tr>
+<tr><td>Value timing</td><td>Ngay khi xuất (có pack trình khách); value trọn vẹn đến trễ hơn khi khách duyệt concept — phụ thuộc khách.</td></tr>
+<tr><td>State</td><td>Dự án, ảnh hiện trạng, các concept và lựa chọn vật liệu được lưu, tích lũy thành portfolio.</td></tr>
+<tr><td>Dependency</td><td>Nguồn khách của designer; khách cung cấp ảnh / mặt bằng; lịch hẹn tư vấn.</td></tr>
+<tr><td>Repeat condition</td><td>Có khách mới, hoặc khách cũ làm tiếp phòng khác trong căn hộ.</td></tr>
+</table></div>
+<p><b>Dạng hành vi:</b> Theo dự án &amp; workflow công việc (project-based / work cadence).</p>
+<div class="sentence">Đối với freelance interior designer, core action xuất Design Pack (<code>design_concept_exported</code>) thường xuất hiện 2–4 lần mỗi tháng vì nó gắn với nhịp nhận khách và số phòng cần trình bày trong từng căn hộ. Do đó, nhịp đo phù hợp là theo tháng ở cấp tài khoản designer.</div>
+
+<h2>03 — Metric System</h2>
+<h3>Activation</h3>
+<div class="wrap"><table>
+<tr><td>Start event</td><td><code>account_created</code> — designer tạo tài khoản.</td></tr>
+<tr><td>Activation event</td><td><code>design_concept_exported</code> đầu tiên.</td></tr>
+<tr><td>Time window</td><td>48 giờ kể từ start event.</td></tr>
+</table></div>
+<h3>Engagement (tối đa 2 góc)</h3>
+<div class="wrap"><table>
+<tr><th>Góc đo</th><th>Định nghĩa</th></tr>
+<tr><td>Breadth</td><td>Tỉ lệ designer xử lý từ 2 loại không gian khác nhau trở lên trong tháng (ví dụ: Living room, Bedroom, Kitchen) — tính theo <code>room_type</code>.</td></tr>
+<tr><td>Depth</td><td>% Design Pack có ít nhất một <code>item_customized</code> trước khi xuất (designer chỉnh chi tiết đồ đạc chứ không xuất nguyên bản AI).</td></tr>
+</table></div>
+<h3>North Star Metric</h3>
+<div class="wrap"><table>
+<tr><td>Unit of value</td><td>Một Design Pack của một phòng được xuất thành công.</td></tr>
+<tr><td>Quality threshold</td><td>Client-Readiness: Pack có tối thiểu 2 góc nhìn phối cảnh (perspectives) + đính kèm moodboard vật liệu có định danh mã màu / chủng loại sơ bộ; xuất lại cùng <code>design_id</code> không được tính thêm.</td></tr>
+<tr><td>Frequency</td><td>Mỗi tháng.</td></tr>
+<tr><td><b>NSM (một câu)</b></td><td>Monthly Qualified Exported Concepts (MQEC) — số hồ sơ concept nội thất đạt chuẩn được xuất thành công mỗi tháng.</td></tr>
+</table></div>
+<h3>Leading indicators (tối đa 3)</h3>
+<div class="wrap"><table>
+<tr><th>Indicator</th><th>Vì sao tin nó dự báo core action lặp lại</th></tr>
+<tr><td>Tỉ lệ activation trong 48 giờ</td><td>Designer chạm value sớm thì nhiều khả năng dùng lại cho khách kế tiếp.</td></tr>
+<tr><td>Multi-room Project Rate — tỉ lệ dự án có ≥ 2 phòng được tạo trong tuần đầu tiên sau khi kích hoạt</td><td>Khách thuê thiết kế thường giao cả căn hộ (2–4 phòng). Designer tạo ngay phòng thứ 2 trên app chứng tỏ công cụ đã vào quy trình làm việc với khách thật, dự báo retention M1 cao.</td></tr>
+</table></div>
+<h3>Counter-metric (ít nhất 1)</h3>
+<div class="wrap"><table>
+<tr><th>Counter-metric</th><th>Bảo vệ điều gì khi metric chính tăng</th></tr>
+<tr><td>Regeneration Rate per Scene — % phòng có &gt; 5 lần <code>ai_render_completed</code></td><td>Chất lượng output của model (chống hallucination) và chi phí render: MQEC tăng nhưng designer phải render lại liên tục là trải nghiệm đang xấu đi.</td></tr>
+</table></div>
+
+<h2>04 — Retention Definition</h2>
+<div class="wrap"><table>
+<tr><td>Unit</td><td>Tài khoản designer (<code>user_id</code>).</td></tr>
+<tr><td>Cohort entry</td><td>Tháng designer được activate (<code>design_concept_exported</code> đầu tiên).</td></tr>
+<tr><td>Return event</td><td><code>design_concept_exported</code>.</td></tr>
+<tr><td>Window</td><td>Theo tháng: M1, M2, M3 sau tháng activate — khớp cadence 2–4 lần/tháng ở mục 02.</td></tr>
+<tr><td>Threshold</td><td>Ít nhất 1 lần trong tháng.</td></tr>
+<tr><td>Segment</td><td>Freelance interior designer đã activate; loại tài khoản nội bộ / test.</td></tr>
+</table></div>
+
+<h2>05 — Product Loop</h2>
+<p><b>Loại loop:</b> Project &amp; Referral Workflow Loop (project + workflow).</p>
+<pre>Natural trigger  → Có khách mới gửi ảnh hiện trạng / mặt bằng
+Core action      → Tinh chỉnh và xuất Design Pack cho phòng
+Immediate value  → Có concept trình khách ngay buổi tư vấn
+Saved state      → Dự án, vật liệu, concept lưu lại thành portfolio
+Next trigger     → Khách duyệt rồi giao thêm phòng khác, hoặc giới thiệu khách mới
+Core action #2   → Xuất Design Pack cho phòng / dự án tiếp theo (tái dùng phong cách, vật liệu đã lưu)
+Repeat value     → Chốt nhanh hơn, portfolio dày hơn, nhiều khách hơn</pre>
+<p><b>Reason to return khi bỏ notification:</b> Tài sản thiết kế cũ và portfolio nằm trong app; mỗi khi có khách mới, đây là nơi dựng concept nhanh nhất.</p>
+<div class="sentence">Nếu loop này hoạt động, metric M1 Retention Rate của Designer sẽ thay đổi theo hướng tăng từ baseline đo được ở cohort đầu tiên (giả định ~20%, chưa có dữ liệu thật) lên mục tiêu trên 35% trong vòng 3 tháng, vì mỗi khi khách duyệt concept phòng đầu qua link chia sẻ, designer sẽ tiếp tục dùng app làm tiếp các phòng còn lại trong cùng căn hộ mà không rời bỏ công cụ.</div>
+
+<h2>06 — Tracking nhanh</h2>
+<div class="wrap"><table>
+<tr><th>Tên event</th><th>Ý nghĩa</th><th>Thời điểm ghi nhận</th><th>Metric sử dụng</th></tr>
+<tr><td><code>account_created</code></td><td>Designer tạo tài khoản thành công.</td><td>Khi bản ghi tài khoản được lưu (không phải khi mở form đăng ký).</td><td>Activation (start event)</td></tr>
+<tr><td><code>room_photo_uploaded</code></td><td>Một phòng mới được tạo trong dự án: ảnh hiện trạng / mặt bằng đã tải lên xong.</td><td>Khi file lưu thành công lên server. Properties: <code>project_id</code>, <code>room_id</code>, <code>room_type</code>.</td><td>Leading: Multi-room Project Rate (đếm <code>room_id</code> theo <code>project_id</code>); Engagement breadth (<code>room_type</code>)</td></tr>
+<tr><td><code>ai_render_completed</code></td><td>AI trả về một phương án render cho phòng.</td><td>Khi render job hoàn tất và ảnh hiển thị được. Properties: <code>room_id</code>, <code>render_id</code>.</td><td>Counter-metric: Regeneration Rate</td></tr>
+<tr><td><code>item_customized</code></td><td>Designer thay / chỉnh một món đồ hoặc vật liệu trong concept.</td><td>Khi thay đổi được lưu vào design (không bắn khi chỉ mở panel chỉnh). Properties: <code>design_id</code>, <code>item_id</code>.</td><td>Engagement depth</td></tr>
+<tr><td><code>design_concept_exported</code></td><td>Design Pack hoàn chỉnh của một phòng đã được tạo.</td><td>Khi API xuất trả về thành công (200) và file sẵn sàng tải. Properties: <code>design_id</code>, <code>room_id</code>, <code>room_type</code>, <code>export_id</code>, <code>perspective_count</code>, <code>has_material_moodboard</code>.</td><td>Activation, NSM (MQEC + quality threshold), Retention, Engagement breadth</td></tr>
+</table></div>
+<h3>Acceptance criteria</h3>
+<ol>
+<li>Với mỗi cặp <code>user_id</code> và <code>design_id</code>, hệ thống chỉ ghi <code>design_concept_exported</code> khi API xuất trả về thành công (HTTP 200) và file Design Pack đã sẵn sàng tải. Bấm "Xuất" mà job lỗi hoặc timeout thì không ghi event.</li>
+<li>Mỗi lần xuất mang một <code>export_id</code> (idempotency key) sinh ở client. F5, retry mạng hoặc bấm lại khi đang xử lý không được tạo thêm <code>design_concept_exported</code> cho cùng <code>export_id</code>.</li>
+<li><code>has_material_moodboard</code> chỉ bằng <code>true</code> khi moodboard trong file xuất có ít nhất một vật liệu đã gắn mã màu / chủng loại; <code>perspective_count</code> đếm số ảnh phối cảnh thực có trong file, không phải số ảnh designer đã chọn trên giao diện.</li>
+<li>Autosave khi designer đang chỉnh không tạo <code>item_customized</code>; với mỗi <code>design_id</code> và <code>item_id</code>, event chỉ được ghi một lần khi thay đổi được lưu vào design.</li>
+</ol>
+
+<h2>Revision</h2>
+<p>Đổi persona từ chủ nhà tự thiết kế sang freelance interior designer: chủ nhà chỉ làm nhà 3–5 năm/lần, tần suất quá thấp để cadence và retention có ý nghĩa.</p>
+</main>
+</body>
+</html>
