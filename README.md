@@ -3,7 +3,7 @@
 - **Họ tên:** Phan Duy Thành
 - **MHV:** 2A202602930
 - **Dự án chọn làm:** AI tự động thiết kế nội thất (persona: Freelance Interior Designer)
-- **Metrics Pack:** [metrics-pack.html](metrics-pack.html)
+- **Metrics Pack:** https://thanhpd123.github.io/Track1_Day20_2A202602930_PhanDuyThanh/metrics-pack.html (mã nguồn: [metrics-pack.html](metrics-pack.html))
 
 ## Điều tôi mang về áp dụng cho dự án thật
 
